@@ -94,7 +94,7 @@ unmount() {
     exit 0
   fi
 
-  VOLUME_ID=$(findmnt ${MNTPATH} -cno SOURCE | sed 's/.*\[\([^]]*\)\].*/\1/g' | cut -f 6 -d '/')
+  VOLUME_ID=$(findmnt ${MNTPATH} -cno SOURCE | sed 's/.*\[\([^]]*\)\].*/\1/g' | cut -f 4 -d '/')
   if [[ -n "${VOLUME_ID}" ]]; then
     # Hack to get the container id from the volume id (See https://github.com/moby/moby/issues/31436)
     VOLUME_CONTAINER_ID=$(docker volume rm $VOLUME_ID 2>&1 | sed 's/.*\[\([^]]*\)\].*/\1/g')
